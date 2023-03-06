@@ -1,8 +1,6 @@
 import sys
 import random
 from functools import partial
-from types import new_class
-from numpy import number
 from sudoku import Sudoku
 from PySide2.QtWidgets import *
 from main_window import Ui_MainWindow
@@ -26,6 +24,7 @@ class MainWindow(QMainWindow):
         self.new_game()        
 
     def new_game(self):
+        global puzzle
         puzzle = Sudoku(3,seed=random.randint(1, 1000)).difficulty(0.5)
         self.show_board(puzzle.board)
 
@@ -49,7 +48,6 @@ class MainWindow(QMainWindow):
                 self.line_edits[i][j].setReadOnly(False)
                 if puzzle_board[i][j] != None:
                     self.line_edits[i][j].setText(str(puzzle_board[i][j]))
-                    self.line_edits[i][j].setStyleSheet('color: rgb(255, 0, 0);')
                     self.line_edits[i][j].setReadOnly(True)
                 else:
                     self.line_edits[i][j].setText("")
@@ -57,22 +55,21 @@ class MainWindow(QMainWindow):
     def validation(self,i,j,text):
         if text not in ["1","2","3","4","5","6","7","8","9"]:
             self.line_edits[i][j].setText(None)
-        self.check()
+        self.check(i,j,text)
 
-    def check(self):
-        for s in range(9):
-            for j in range(9):
-                for i in range(9):
-                    number1 = self.line_edits[s][j].text()
-                    number2 = self.line_edits[s][i].text()
-                    if number1 == number2 and number1 != "" and number2 != "" and j != i:
-                        print("sf")
-                        break
+    def check(self,i,j,text):
+        solution = puzzle.solve()
+        solution_l = solution.board
+        if str(solution_l[i][j]) == text and solution_l[i][j] != "":
+            self.status(True,i,j)
+        else:    
+            self.status(False,i,j)
 
-                    number1 = self.line_edits[j][s].text()
-                    number2 = self.line_edits[i][s].text()
-                    if number1 == number2 and number1 != "" and number2 != "" and j != i:
-                        print("sfg")
+    def status(self,status,i,j):
+        if status == True:
+            self.line_edits[i][j].setStyleSheet("background-color: rgb(170, 255, 255);")
+        else:
+            self.line_edits[i][j].setStyleSheet("background-color: rgb(255, 0, 0);")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
