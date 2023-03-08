@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>window</class>
+ <widget class="QMainWindow" name="window">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>464</width>
-    <height>468</height>
+    <width>339</width>
+    <height>422</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>sudoku</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>461</width>
-      <height>431</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="grid_layout"/>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="menu"/>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="grid_layout"/>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>464</width>
+     <width>339</width>
      <height>21</height>
     </rect>
    </property>
@@ -43,7 +43,35 @@
     <addaction name="separator"/>
     <addaction name="menu_Openfile"/>
    </widget>
+   <widget class="QMenu" name="menuabout">
+    <property name="title">
+     <string>about</string>
+    </property>
+    <addaction name="menuAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuhelp">
+    <property name="title">
+     <string>help</string>
+    </property>
+    <addaction name="menuHelp"/>
+   </widget>
+   <widget class="QMenu" name="menuExit">
+    <property name="title">
+     <string>Exit</string>
+    </property>
+    <addaction name="menuexit_2"/>
+   </widget>
+   <widget class="QMenu" name="menuSolve">
+    <property name="title">
+     <string>Solve</string>
+    </property>
+    <addaction name="menusolve"/>
+   </widget>
    <addaction name="menufile"/>
+   <addaction name="menuabout"/>
+   <addaction name="menuhelp"/>
+   <addaction name="menuExit"/>
+   <addaction name="menuSolve"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="menu_new">
@@ -54,6 +82,26 @@
   <action name="menu_Openfile">
    <property name="text">
     <string>Open file</string>
+   </property>
+  </action>
+  <action name="menuAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="menuHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="menuexit_2">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="menusolve">
+   <property name="text">
+    <string>solve </string>
    </property>
   </action>
  </widget>
